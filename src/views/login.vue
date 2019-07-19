@@ -27,39 +27,57 @@
   </div>
 </template>
 <script>
+import { login } from '@/unitl/user_index.js'
 export default {
-  data() {
+  data () {
     return {
       loginForm: {
-        username: "",
-        password: ""
+        username: '',
+        password: ''
       },
       rules: {
         username: [
-          { required: true, message: "请输入用户名", trigger: "blur" }
+          { required: true, message: '请输入用户名', trigger: 'blur' }
         ],
         password: [
-          { required: true, message: "请输入密码", trigger: "blur" },
-          { min: 3, max: 10, message: "长度在 3 到 10 个字符", trigger: "blur" }
+          { required: true, message: '请输入密码', trigger: 'blur' },
+          { min: 3, max: 10, message: '长度在 3 到 10 个字符', trigger: 'blur' }
         ]
       }
-    };
+    }
   },
   methods: {
-    login() {
-      this.$refs.loginForm.validate(valid => {
-          if(valid){
-              console.log(msg)
-                  this.$message({
-              message: '恭喜你,登录成功',
-              type: 'success'
+    login () {
+      this.$refs.loginForm.validate((valid) => {
+        if (valid) {
+          login(this.loginForm).then(res => {
+            console.log(res)
+            if (res.data.meta.status === 200) {
+              this.$router.push({ name: 'home' })
+            } else {
+              this.$message({
+                message: res.data.meta.msg,
+                type: 'error'
               })
-              
-          }
-      });
+            }
+          }).catch((err) => {
+            console.log(err)
+            this.$message({
+              message: '登录失败',
+              type: 'error'
+            })
+          })
+        } else {
+          this.$message({
+            message: '数据不合法',
+            type: 'error'
+          })
+          return false
+        }
+      })
     }
   }
-};
+}
 </script>
 <style lang="less" scoped>
 .login {
