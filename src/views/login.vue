@@ -2,15 +2,15 @@
 <div class="login">
   <div class="container">
       <img src="../assets/avatar.jpg" alt="" class="avatar">
-   <el-form :model="loginForm" :rules="rules" ref="loginForm" label-width="100px" class="demo-ruleForm">
+   <el-form :model="loginForm" :rules="rules" ref="loginForm" class="demo-ruleForm">
      <el-form-item  prop="username">
        <el-input type="username" v-model="loginForm.username" placeholder="用户名"></el-input>
      </el-form-item>
-     <el-form-item prop="username">
+     <el-form-item prop="password">
         <el-input type="password" v-model="loginForm.password" placeholder="密码"></el-input>
       </el-form-item>
     <el-form-item>
-       <el-button type="botton" class="login-btn">登录</el-button>
+       <el-button type="primary" class="login-btn">登录</el-button>
      </el-form-item>
   </el-form>
   </div>
@@ -20,10 +20,24 @@
 export default {
     data(){
         return{
+            loginForm:{
             username:'',
             password:'',
+            },
+            rules:{
+                username:[
+            { required: true, message: '请输入用户名', trigger: 'blur' },
+          ],
+          password: [
+            { required: true, message: '请输入密码', trigger: 'blur' },
+            { min: 3, max: 10, message: '长度在 3 到 10 个字符', trigger: 'blur' }
+          ],
+            }
         }
     },
+    methods: {
+        
+    }
 
 }
 </script>
@@ -48,9 +62,10 @@ export default {
       height: 120px;
       margin-left: -60px;
       margin-top: -60px;
+      margin-bottom:20px;
       box-sizing: border-box;
       border-radius: 50%;
-      border: 10px solid #fff;
+      border: 5px solid #fff;
       box-shadow: 0 1px 5px #ccc;
       overflow: hidden;
     }
