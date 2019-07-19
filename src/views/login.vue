@@ -4,13 +4,13 @@
       <img src="../assets/avatar.jpg" alt="" class="avatar">
    <el-form :model="loginForm" :rules="rules" ref="loginForm" class="demo-ruleForm">
      <el-form-item  prop="username">
-       <el-input type="username" v-model="loginForm.username" placeholder="用户名"></el-input>
+       <el-input type="username" v-model="loginForm.username" placeholder="用户名" prefix-icon="myicon-user"></el-input>
      </el-form-item>
      <el-form-item prop="password">
-        <el-input type="password" v-model="loginForm.password" placeholder="密码"></el-input>
+        <el-input type="password" v-model="loginForm.password" placeholder="密码" prefix-icon="myicon-key"></el-input>
       </el-form-item>
     <el-form-item>
-       <el-button type="primary" class="login-btn">登录</el-button>
+       <el-button type="primary" class="login-btn" @click="login">登录</el-button>
      </el-form-item>
   </el-form>
   </div>
@@ -36,7 +36,9 @@ export default {
         }
     },
     methods: {
-        
+       login(){
+
+       } 
     }
 
 }
